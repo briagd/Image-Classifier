@@ -23,6 +23,7 @@ class Ensemble:
         for i in range(1, len(pred_dfs)):
             summed = summed.add(pred_dfs[i])
         # replace values by label
-        summed = summed.where(summed < threshold, 1)
         summed = summed.where(summed >= threshold, 0)
+        summed = summed.where(summed < threshold, 1)
+
         return summed
