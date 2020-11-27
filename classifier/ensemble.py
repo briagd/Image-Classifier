@@ -1,3 +1,6 @@
+from .data_stats import DataStats
+
+
 class Ensemble:
     def compute_agg(pred_dfs, threshold, weights=None):
         """
@@ -14,7 +17,8 @@ class Ensemble:
         """
         for i in range(len(pred_dfs)):
             # drop the filename column
-            pred_dfs[i] = pred_dfs[i].drop(0, axis=1)
+            pred_dfs[i] = DataStats.drop_fname_col(pred_dfs[i])
+
             if weights:
                 # multiply each value by weight
                 pred_dfs[i] = pred_dfs[i] * weights[i]
