@@ -33,7 +33,6 @@ class DataStats:
     def class_counts(csv_path, csv_header=None):
         data_df = pd.read_csv(csv_path, sep=" ", header=csv_header)
         data_df = DataStats.drop_fname_col(data_df)
-
         return [data_df[col].sum() for col in data_df.columns]
 
     @staticmethod
@@ -43,6 +42,7 @@ class DataStats:
         neg_counts = [sum(class_counts) - pos_count for pos_count in class_counts]
         for i in range(len(class_counts)):
             pos_weights.append(neg_counts[i] / (class_counts[i] + 0.00001))
+
         return pos_weights
 
     @staticmethod
